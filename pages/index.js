@@ -1,4 +1,5 @@
 import Roadmap from "../src/basic.roadmap-extended.json";
+import Header from '../components/header'
 
 const Link = ({ model, type }) => {
     const isVideos = type === "videos";
@@ -150,7 +151,7 @@ const Sources = ({ model }) => {
 
 const Node = ({ model, index }) => {
     return (
-        <div style={{ marginLeft: 64 }}>
+        <div style={{ marginLeft: 64 }} id={model.name}>
             <h1>
                 {index}. {model.name}
             </h1>
@@ -175,9 +176,17 @@ const Node = ({ model, index }) => {
 };
 
 export default () => (
-    <div>
-        {Roadmap.roadmap.map((e, index) => (
-            <Node key={e.name} index={index} model={e} />
-        ))}
-    </div>
+    <>
+        <style jsx="true">{`
+            .container {
+                padding: 0 2rem;
+            }
+        `}</style>
+        <div className="container">
+            <Header />
+            {Roadmap.roadmap.map((e, index) => (
+                <Node key={e.name} index={index} model={e} />
+            ))}
+        </div>
+    </>
 );
